@@ -160,5 +160,27 @@ namespace InventorySystem.Tests
             // Assert
             Assert.Throws<ArgumentException>(action);
         }
+
+
+        [Fact]
+        public void AddProduct_EmptyId_ThrowsArgumentException()
+        {
+            // Arrange
+            InventoryOrderService service = new InventoryOrderService();
+
+            Product product = new Product
+            {
+                Id = "",
+                Name = "Keyboard",
+                UnitPrice = 100m,
+                StockQuantity = 10
+            };
+
+            // Act
+            Action action = () => service.AddProduct(product);
+
+            // Assert
+            Assert.Throws<ArgumentException>(action);
+        }
     }
 }
