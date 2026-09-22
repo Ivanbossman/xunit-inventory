@@ -100,5 +100,34 @@ namespace InventorySystem.Tests
             Assert.True(result.IsSuccess);
             Assert.Equal(1000m, result.TotalCost);
         }
+
+
+
+
+
+        [Fact]
+        public void ProcessOrder_TwentyItems_AppliesTenPercentDiscount()
+        {
+            // Arrange
+            InventoryOrderService service = new InventoryOrderService();
+
+            service.AddProduct(new Product
+            {
+                Id = "P104",
+                Name = "Mouse",
+                UnitPrice = 10m,
+                StockQuantity = 30
+            });
+
+            // Act
+            OrderResult result = service.ProcessOrder("P104", 20, 0m);
+
+            // Assert
+            Assert.True(result.IsSuccess);
+            Assert.Equal(180m, result.TotalCost);
+        }
+
+
+
     }
 }
