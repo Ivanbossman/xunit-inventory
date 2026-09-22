@@ -145,5 +145,20 @@ namespace InventorySystem.Tests
             // Assert
             Assert.Equal(7, product.StockQuantity);
         }
+
+
+        [Fact]
+        public void AddProduct_NullProduct_ThrowsArgumentException()
+        {
+            // Arrange
+            InventoryOrderService service = new InventoryOrderService();
+            Product product = null;
+
+            // Act
+            Action action = () => service.AddProduct(product);
+
+            // Assert
+            Assert.Throws<ArgumentException>(action);
+        }
     }
 }
