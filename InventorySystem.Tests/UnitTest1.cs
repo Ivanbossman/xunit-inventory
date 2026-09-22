@@ -52,7 +52,6 @@ namespace InventorySystem.Tests
 
 
 
-
         [Fact]
         public void ProcessOrder_FiftyItems_AppliesTwentyPercentDiscount()
         {
@@ -74,8 +73,6 @@ namespace InventorySystem.Tests
             Assert.True(result.IsSuccess);
             Assert.Equal(4000m, result.TotalCost);
         }
-
-
 
 
 
@@ -103,8 +100,6 @@ namespace InventorySystem.Tests
 
 
 
-
-
         [Fact]
         public void ProcessOrder_TwentyItems_AppliesTenPercentDiscount()
         {
@@ -129,5 +124,26 @@ namespace InventorySystem.Tests
 
 
 
+        [Fact]
+        public void ProcessOrder_ValidOrder_DeductsStock()
+        {
+            // Arrange
+            InventoryOrderService service = new InventoryOrderService();
+
+            service.AddProduct(new Product
+            {
+                Id = "P105",
+                Name = "Monitor",
+                UnitPrice = 200m,
+                StockQuantity = 10
+            });
+
+            // Act
+            service.ProcessOrder("P105", 3, 0m);
+            Product product = service.GetProduct("P105");
+
+            // Assert
+            Assert.Equal(7, product.StockQuantity);
+        }
     }
 }
