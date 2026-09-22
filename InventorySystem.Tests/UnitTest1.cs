@@ -49,5 +49,8 @@ namespace InventorySystem.Tests
             Assert.True(result.IsSuccess);
             Assert.Equal(900m, result.TotalCost);
         }
+
+
+
     }
 }
