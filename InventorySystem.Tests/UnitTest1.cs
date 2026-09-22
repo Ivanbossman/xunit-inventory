@@ -110,5 +110,28 @@ namespace InventorySystem.Tests
             Assert.False(result.IsSuccess);
             Assert.Equal("Product not found.", result.Message);
         }
+
+
+        [Fact]
+        public void ProcessOrder_NegativeQuantity_ReturnsFailure()
+        {
+            // Arrange
+            InventoryOrderService service = new InventoryOrderService();
+
+            service.AddProduct(new Product
+            {
+                Id = "P104",
+                Name = "Keyboard",
+                UnitPrice = 100m,
+                StockQuantity = 10
+            });
+
+            // Act
+            OrderResult result = service.ProcessOrder("P104", -1, 0m);
+
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.Equal("Quantity must be positive.", result.Message);
+        }
     }
 }
