@@ -133,5 +133,28 @@ namespace InventorySystem.Tests
             Assert.False(result.IsSuccess);
             Assert.Equal("Quantity must be positive.", result.Message);
         }
+
+
+        [Fact]
+        public void ProcessOrder_MoreThanStock_ReturnsFailure()
+        {
+            // Arrange
+            InventoryOrderService service = new InventoryOrderService();
+
+            service.AddProduct(new Product
+            {
+                Id = "P105",
+                Name = "Mouse",
+                UnitPrice = 50m,
+                StockQuantity = 5
+            });
+
+            // Act
+            OrderResult result = service.ProcessOrder("P105", 6, 0m);
+
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.Equal("Insufficient stock.", result.Message);
+        }
     }
 }
