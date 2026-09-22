@@ -27,6 +27,7 @@ namespace InventorySystem.Tests
             Assert.Equal(210m, result.TotalCost);
         }
 
+
         [Fact]
         public void ProcessOrder_TenItems_AppliesTenPercentDiscount()
         {
