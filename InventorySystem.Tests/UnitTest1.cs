@@ -182,5 +182,28 @@ namespace InventorySystem.Tests
             // Assert
             Assert.Throws<ArgumentException>(action);
         }
+
+
+        [Fact]
+        public void ProcessOrder_ZeroQuantity_ReturnsFailure()
+        {
+            // Arrange
+            InventoryOrderService service = new InventoryOrderService();
+
+            service.AddProduct(new Product
+            {
+                Id = "P106",
+                Name = "Keyboard",
+                UnitPrice = 100m,
+                StockQuantity = 10
+            });
+
+            // Act
+            OrderResult result = service.ProcessOrder("P106", 0, 0m);
+
+            // Assert
+            Assert.False(result.IsSuccess);
+            Assert.Equal("Quantity must be positive.", result.Message);
+        }
     }
 }
