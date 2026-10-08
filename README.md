@@ -25,7 +25,7 @@ This project focuses on testing an inventory order processing system using C# an
 - Inventory order validation
 
 ## Screenshot
-
+![Unit Tests Running](Screenshot(59).png)
 
 ## What I Learned
 This project helped me improve my understanding of unit testing, debugging, and using Git for version control.
